@@ -17,3 +17,6 @@ class HTMLNode:
     
     def __repr__(self):
         return(f"Tag: {self.tag} Value: {self.value} Children: {self.children} Props: {self.props}")
+    
+#class LeafNode(HTMLNode):
+    
