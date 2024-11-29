@@ -1,7 +1,7 @@
 import unittest
 
 from textnode import TextNode, TextType, text_node_to_html_node
-from split_nodes import split_nodes_delimiter
+from text_operations import *
 
 
 
@@ -55,5 +55,23 @@ class TestSplitNodesDelimiter(unittest.TestCase):
             TextNode(" at the start", TextType.TEXT)]
         self.assertEqual(result, expected_result)
 
+class TestTextoperations(unittest.TestCase):
+    def test_image_extraction(self):
+        text =  "This is text with a ![rick roll](https://i.imgur.com/aKaOqIh.gif) and ![obi wan](https://i.imgur.com/fJRm4Vk.jpeg)"
+        result = extract_markdown_images(text)
+        expected_result = [('rick roll', 'https://i.imgur.com/aKaOqIh.gif'), ('obi wan', 'https://i.imgur.com/fJRm4Vk.jpeg')]
+        self.assertEqual(result, expected_result)
+
+    def test_image_extraction2(self):
+        text =  "This is text with a [rick roll](https://i.imgur.com/aKaOqIh.gif) and ![obi wan](https://i.imgur.com/fJRm4Vk.jpeg)"
+        result = extract_markdown_images(text)
+        expected_result = [('obi wan', 'https://i.imgur.com/fJRm4Vk.jpeg')]
+        self.assertEqual(result, expected_result)
+
+    def test_link_extraction(self):
+        text =  "This is text with a [rick roll](https://i.imgur.com/aKaOqIh.gif) and ![obi wan](https://i.imgur.com/fJRm4Vk.jpeg)"
+        result = extract_markdown_links(text)
+        expected_result = [('rick roll', 'https://i.imgur.com/aKaOqIh.gif')]
+        self.assertEqual(result, expected_result)
 if __name__ == '__main__':
     unittest.main()
