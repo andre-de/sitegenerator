@@ -1,4 +1,5 @@
 from htmlnode import *
+from textnode import TextNode, TextType, text_node_to_html_node
 
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
     total_list = []
