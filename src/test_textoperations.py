@@ -73,5 +73,36 @@ class TestTextoperations(unittest.TestCase):
         result = extract_markdown_links(text)
         expected_result = [('rick roll', 'https://i.imgur.com/aKaOqIh.gif')]
         self.assertEqual(result, expected_result)
+
+class TestSplitNodesLink(unittest.TestCase):
+    def test_single_link(self):
+        node = TextNode("Visit [Boot.dev](https://www.boot.dev) for more.", TextType.TEXT)
+        result = split_nodes_link([node])
+        expected_result = [TextNode("Visit ", TextType.TEXT), TextNode("Boot.dev", TextType.LINK, "https://www.boot.dev"),TextNode(" for more.", TextType.TEXT)]
+        self.assertEqual(result, expected_result)
+    def test_multiple_links(self):
+        node = TextNode("Check [Google](https://www.google.com) and [Bing](https://www.bing.com).", TextType.TEXT)
+        result = split_nodes_link([node])
+        expected_result = [TextNode("Check ", TextType.TEXT), TextNode("Google", TextType.LINK, "https://www.google.com"),TextNode(" and ", TextType.TEXT), TextNode("Bing", TextType.LINK, "https://www.bing.com"), TextNode(".", TextType.TEXT)]
+        self.assertEqual(result, expected_result)
+    
+    def test_no_links(self):
+        node = TextNode("Hello World!", TextType.TEXT)
+        result = split_nodes_link([node])
+        expected_result = [TextNode("Hello World!", TextType.TEXT)]
+        self.assertEqual(result, expected_result)
+    
+    def test_link_at_start(self):
+        node = TextNode("[Start](https://start.com) text.", TextType.TEXT)
+        result = split_nodes_link([node])
+        expected_result = [TextNode("Start", TextType.LINK, "https://start.com"), TextNode(" text.", TextType.TEXT)]
+        self.assertEqual(result, expected_result)
+
+    def test_link_at_end(self):
+        node = TextNode("End of text [here](https://here.com).", TextType.TEXT)
+        result = split_nodes_link([node])
+        expected_result = [TextNode("End of text ", TextType.TEXT), TextNode("here", TextType.LINK, "https://here.com"), TextNode(".", TextType.TEXT)]
+        self.assertEqual(result, expected_result)
+
 if __name__ == '__main__':
     unittest.main()

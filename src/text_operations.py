@@ -33,5 +33,27 @@ def split_nodes_image(old_nodes):
     pass
 
 def split_nodes_link(old_nodes):
-    ##
-    pass
+    new_nodes = []
+    for node in old_nodes:
+        links = extract_markdown_links(node.text)
+        for link_text, link_url in links:
+            link_pattern = f"[{link_text}]({link_url})"
+            parts = node.text.split(link_pattern, 1)
+
+            # Part before the link
+            if parts[0]:  # Check for non-empty text  
+                new_nodes.append(TextNode(parts[0], TextType.TEXT))
+
+            # The link itself
+            new_nodes.append(TextNode(link_text, TextType.LINK, link_url))
+
+            # Prepare for the next iteration
+            node.text = parts[1]
+
+        # After loop: Check if there's remaining text after the last link
+        if node.text:
+            new_nodes.append(TextNode(node.text, TextType.TEXT))
+            
+    return new_nodes
+
+
