@@ -1,8 +1,19 @@
 from textnode import *
+from text_operations import *
 
 def main():
-    a = TextNode("This is a text node", TextType.BOLD, "https://www.boot.dev")
-    print(a)
+    test_md = """# Heading
+
+    Paragraph here.
+
+    * List item"""
+
+    print(markdown_to_blocks(test_md))
+
+
+
+
+
 
 if __name__ == "__main__":
     main()
