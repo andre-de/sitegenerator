@@ -12,22 +12,29 @@ def markdown_to_blocks(markdown):
 
 
 def block_to_block_type(block): #tbd
-
-
+    if is_quote_block(block):
+        return "quote"
+    if is_heading_block(block):
+        return "heading"
+    if is_code_block(block):
+        return "code"
+    if is_unordered_list(block):
+        return "unordered_list"
+    if is_ordered_list(block):
+        return "ordered_list"
     return "paragraph"
 
 
 
 
 def is_quote_block(block): #done
-    quoted_line = True
     block_lines = block.split("\n")
     for line in block_lines:
         if len(line) == 0:
             return False
         elif line[0] != ">":
-            quoted_line = False
-    return quoted_line
+            return False
+    return True
 
 
 def is_heading_block(block): #done
@@ -58,12 +65,32 @@ def is_code_block(block): #done
     return True
 
 
-def is_unordered_list(block):#tbd
+def is_unordered_list(block):#done
+    elements = block.split("\n")
+    for line in elements:
+        if len(line) < 2:
+            return False
+        if (line[0] != "*" and line[0] != "-") or line[1] != " ":
+            return False
+    return True
 
-    return False
 
-
-def is_ordered_list(block):#tbd
-
-    return False
+def is_ordered_list(block):#done
+    counter = 0
+    elements = block.split("\n")
+    for line in elements:
+        if len(line)<3:
+            return False
+        if not "." in line:
+            return False
+        sequence = line.split(".")
+        if not sequence[0].isnumeric():
+            return False
+        if sequence[1][0] != " ":
+            return False
+        if int(sequence[0]) != counter + 1:
+            return False
+        counter += 1
+        
+    return True
 

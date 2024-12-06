@@ -21,9 +21,10 @@ This is the same paragraph on a new line
 > quote block
 > quote block
 
-1. ordered list
-2. ordered list
-3. ordered list
+1. 1ordered list
+2. 2ordered list
+3. 3ordered list
+
 
 ``` code block```
 
@@ -44,10 +45,12 @@ This is the same paragraph on a new line
     block8 = blocks[7]
     block9 = blocks[8]
     block10 = blocks[9]
-    print(block8)
+    print(block7)
     #print(is_heading_block(block4))
     #print(is_quote_block(block6))
-    print(is_code_block(block8))
+    #print(is_code_block(block8))
+    #print(is_unordered_list(block3))
+    print(block_to_block_type(block7))
 
 
 
