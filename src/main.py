@@ -1,14 +1,39 @@
 from textnode import *
 from text_operations import *
+from markdown_blocks import *
+
 
 def main():
-    test_md = """# Heading
+    test_md = """
+This is **bolded** paragraph
 
-    Paragraph here.
+This is another paragraph with *italic* text and `code` here
+This is the same paragraph on a new line
 
-    * List item"""
+* This is a list
+* with items
 
-    print(markdown_to_blocks(test_md))
+#### This is a heading
+
+###########This is NOT a heading
+
+> quote block
+> quote block
+> quote block
+
+1. ordered list
+2. ordered list
+3. ordered list
+
+``` code block```
+
+``` not code block ``
+
+` not code block ````
+
+"""
+    blocks = markdown_to_blocks(test_md)
+    print(blocks)
 
 
 
