@@ -44,9 +44,10 @@ This is the same paragraph on a new line
     block8 = blocks[7]
     block9 = blocks[8]
     block10 = blocks[9]
-    print(block6)
+    print(block8)
     #print(is_heading_block(block4))
-    print(is_quote_block(block6))
+    #print(is_quote_block(block6))
+    print(is_code_block(block8))
 
 
 

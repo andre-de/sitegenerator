@@ -38,9 +38,24 @@ def is_heading_block(block): #done
     return False
 
 
-def is_code_block(block): #tbd
+def is_code_block(block): #done
+    elements = block.split("\n")
+    last_element = elements[len(elements)-1]
 
-    return False
+    # check first element for the three fronting backticks
+    if len(elements[0]) < 3:
+        return False
+    if elements[0][0] != "`" or elements[0][1] != "`" or elements[0][2] != "`":
+        return False
+    
+    #check last element for the three trailing backticks
+    lle = len(last_element)
+    if len(last_element) < 3:
+        return False
+    if last_element[lle-1] != "`" or last_element[lle-2] != "`" or last_element[lle-3] != "`":
+        return False
+
+    return True
 
 
 def is_unordered_list(block):#tbd
