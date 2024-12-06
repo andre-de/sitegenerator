@@ -13,7 +13,7 @@ This is the same paragraph on a new line
 * This is a list
 * with items
 
-#### This is a heading
+# This is a heading
 
 ###########This is NOT a heading
 
@@ -33,7 +33,22 @@ This is the same paragraph on a new line
 
 """
     blocks = markdown_to_blocks(test_md)
-    print(blocks)
+    #print(blocks)
+    block1 = blocks[0]
+    block2 = blocks[1]
+    block3 = blocks[2]
+    block4 = blocks[3]
+    block5 = blocks[4]
+    block6 = blocks[5]
+    block7 = blocks[6]
+    block8 = blocks[7]
+    block9 = blocks[8]
+    block10 = blocks[9]
+    print(block6)
+    #print(is_heading_block(block4))
+    print(is_quote_block(block6))
+
+
 
 
 
