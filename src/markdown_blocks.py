@@ -24,7 +24,7 @@ def markdown_to_blocks(markdown):
 
 
 
-def block_to_block_type(block): #tbd
+def block_to_block_type(block):
     if is_quote_block(block):
         return "quote"
     if is_heading_block(block):
@@ -40,7 +40,7 @@ def block_to_block_type(block): #tbd
 
 
 
-def is_quote_block(block): #done
+def is_quote_block(block):
     block_lines = block.split("\n")
     for line in block_lines:
         if len(line) == 0:
@@ -50,7 +50,7 @@ def is_quote_block(block): #done
     return True
 
 
-def is_heading_block(block): #done
+def is_heading_block(block): 
     elements = block.split()
     hash_count = elements[0].count("#")
     if hash_count > 0 and hash_count < 7 and hash_count == len(elements[0]):
@@ -58,7 +58,7 @@ def is_heading_block(block): #done
     return False
 
 
-def is_code_block(block): #done
+def is_code_block(block):
     elements = block.split("\n")
     last_element = elements[len(elements)-1]
 
@@ -78,7 +78,7 @@ def is_code_block(block): #done
     return True
 
 
-def is_unordered_list(block):#done
+def is_unordered_list(block):
     elements = block.split("\n")
     for line in elements:
         if len(line) < 2:
@@ -88,7 +88,7 @@ def is_unordered_list(block):#done
     return True
 
 
-def is_ordered_list(block):#done
+def is_ordered_list(block):
     counter = 0
     elements = block.split("\n")
     for line in elements:
