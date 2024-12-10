@@ -142,6 +142,18 @@ this is paragraph text
             "<div><blockquote>This is a blockquote block</blockquote><p>this is paragraph text</p></div>",
         )
 
+class TestPullH1Header(unittest.TestCase):
+    def test_h1_1(self):
+        result = extract_title("# Test   ")
+        self.assertEqual(result, "Test")
+
+    def test_h1_2(self):
+        result = extract_title("# Test\nHi#   ")
+        self.assertEqual(result, "Test")
+
+    def test_h1_3(self):
+        result = extract_title("## Ho Header\n# Header   ")
+        self.assertEqual(result, "Header")
 
 if __name__ == "__main__":
     unittest.main()

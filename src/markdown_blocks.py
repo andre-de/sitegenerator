@@ -203,3 +203,10 @@ def quote_to_html_node(block):
     children = text_to_children(content)
     return ParentNode("blockquote", children)
 
+def extract_title(string):
+    string_list = string.split("\n")
+    for element in string_list:
+        if element.startswith("# "):
+            return (element.rstrip()).lstrip("# ")
+    raise Exception("No H1-Header")
+    
