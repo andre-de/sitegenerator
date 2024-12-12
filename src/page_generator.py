@@ -1,10 +1,7 @@
 import os
-import shutil
-import htmlnode
-import copystatic
 from markdown_blocks import markdown_to_html_node, extract_title
-import textnode
-import text_operations
+from pathlib import Path
+
 
 def generate_page(from_path, template_path, dest_path):
     print(f"Generating page from {from_path} to {dest_path} using {template_path}")
@@ -24,6 +21,16 @@ def generate_page(from_path, template_path, dest_path):
     new_html_file = open(dest_path, "w")
     new_html_file.write(full_page)
     new_html_file.close()
+
+def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
+    for filename in os.listdir(dir_path_content):
+        from_path = os.path.join(dir_path_content, filename)
+        dest_path = os.path.join(dest_dir_path, filename)
+        if os.path.isfile(from_path):
+            dest_path = Path(dest_path).with_suffix(".html")
+            generate_page(from_path, template_path, dest_path)
+        else:
+            generate_pages_recursive(from_path, template_path, dest_path)
 
 
 
